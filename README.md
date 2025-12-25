@@ -1,30 +1,41 @@
 # Smart Signature Verification System (EDV 2026)
 
-An AI-based signature verification system using a CNN model with
-threshold-based decision logic.
+This project is an AI-based signature verification system built using deep learning and computer vision.  
+It verifies handwritten signatures and classifies them as **Accept**, **Review**, or **Reject** using a confidence-based decision logic.
+
+---
 
 ## Features
-- Live signature drawing verification
-- Image upload verification (PNG/JPG)
-- Accept / Review / Reject classification
-- Confidence score based decision logic
+- Live signature verification using canvas input
+- Signature verification via image upload (PNG/JPG)
+- CNN-based deep learning model (ResNet50)
+- Threshold-based decision system (Accept / Review / Reject)
+- Clean and explainable UI for demonstrations
+
+---
 
 ## Tech Stack
-- Python (Flask)
-- TensorFlow / Keras
-- HTML, CSS, JavaScript
+- Backend: Python (Flask)
+- Frontend: HTML, CSS, JavaScript
+- AI Model: TensorFlow / Keras (CNN – ResNet50)
+- Libraries: OpenCV, NumPy
 
-## How to Run
-1. Install dependencies
-   pip install -r requirements.txt
+---
 
-2. Download model file (see below)
-3. Place model in project root
-4. Run:
-   python app.py
+## Model File (Download Required)
 
-## Model File
-The trained model is hosted externally due to GitHub size limits.
+The trained deep learning model file is hosted on Google Drive due to GitHub size limits.
 
-(Add your Google Drive model link here)
+🔗 **Download Model:**  
+https://drive.google.com/file/d/1-ThlL9Ld_qdFkDoiIs9egvMC_vj8Z_as/view?usp=sharing
+
+After downloading, place the `.h5` file in the project root directory.
+
+---
+
+## How to Run the Project
+
+1. Clone this repository
+2. Install dependencies:
+
 
