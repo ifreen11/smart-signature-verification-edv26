@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Signature Verification Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='signature_pad.umd.min.js') }}"></script>
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-title">Smart Signature<br>Verification System</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item active" data-tab="dashboard">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </li>
+            <li class="menu-item" data-tab="live">
+                <i class="fa-solid fa-signature"></i>
+                <span>Live Verification</span>
+            </li>
+            <li class="menu-item" data-tab="upload">
+                <i class="fa-solid fa-upload"></i>
+                <span>Upload & Verify</span>
+            </li>
+            <li class="menu-item" data-tab="methodology">
+                <i class="fa-solid fa-flask-vial"></i>
+                <span>Methodology</span>
+            </li>
+            <li class="menu-item" data-tab="about">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>About Project</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="main-header">
+            <h1 id="main-title">Dashboard</h1>
+        </header>
+
+        <div class="content-panels">
+
+            <!-- DASHBOARD -->
+            <div class="panel active" id="dashboard-panel">
+                <!-- <h2>Project Overview</h2> -->
+
+                <!-- ✅ Prototype Disclaimer -->
+                <p style="font-size: 0.9rem; color: #6c757d; margin-top: 0.5rem;">
+                    This is a working prototype developed for hackathon evaluation.
+                    The system is trained on limited academic datasets and demonstrates
+                    core verification logic, not production-scale accuracy.
+                </p>
+
+                <p>
+                    Welcome to the AI-powered signature verification dashboard.
+                    This system uses a trained deep learning model to verify signatures
+                    and classify them as Accept, Review, or Reject.
+                </p>
+
+                <!-- ✅ How to Test -->
+                <h3 style="margin-top: 1.5rem;">How to Test This Prototype</h3>
+                <ul>
+                    <li>Go to <strong>Live Verification</strong> and draw a signature</li>
+                    <li>Or use <strong>Upload & Verify</strong> to upload a PNG/JPG file</li>
+                    <li>Observe <strong>Accept / Review / Reject</strong> with confidence score</li>
+                </ul>
+
+                <div class="stat-card-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="color:#0052cc;">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h3>Total Verifications</h3>
+                            <p>128</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="color:#28a745;">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h3>Accepted</h3>
+                            <p>82</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="color:#dc3545;">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h3>Rejected</h3>
+                            <p>31</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon" style="color:#ffc107;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div class="stat-card-info">
+                            <h3>Review Needed</h3>
+                            <p>15</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIVE VERIFICATION -->
+            <div class="panel" id="live-panel">
+                <!-- <h2>Live Signature Verification</h2> -->
+                <p>Draw a signature below and verify it using the AI model.</p>
+
+                <div class="signature-pad-container">
+                    <canvas id="signature-canvas"></canvas>
+                    <div class="sig-pad-footer">
+                        <span>Sign in the box above</span>
+                        <button id="clear-canvas-btn" class="button-secondary">Clear</button>
+                    </div>
+                </div>
+
+                <button id="verify-drawing-btn" class="button-primary">Verify Drawing</button>
+            </div>
+
+            <!-- UPLOAD -->
+            <div class="panel" id="upload-panel">
+                <!-- <h2>Upload & Verify</h2> -->
+                <p>Upload an image of a signature (PNG or JPG).</p>
+
+                <form id="upload-form">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="file-input" name="file" accept="image/png, image/jpeg" required>
+                        <label for="file-input" class="file-upload-label">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                            <span id="file-name">Click to choose a file...</span>
+                        </label>
+                    </div>
+                    <button type="submit" id="upload-button" class="button-primary">
+                        Verify Upload
+                    </button>
+                </form>
+            </div>
+
+            <!-- METHODOLOGY -->
+<div class="panel" id="methodology-panel">
+
+    <p style="font-size: 1.05rem; font-weight: 600; color:#1a202c;">
+        The system follows a structured, production-inspired AI pipeline
+        designed for accurate and explainable signature verification.
+    </p>
+
+    <ul style="margin-top:1rem; font-size:1rem; line-height:1.8; color:#374151;">
+        <li>
+            <strong style="color:#0d6efd;">Input Acquisition:</strong>
+            Signature is captured either through live canvas drawing
+            or uploaded as an image file (PNG/JPG).
+        </li>
+        <li>
+            <strong style="color:#0d6efd;">Preprocessing:</strong>
+            The image is resized, normalized, and cleaned to remove
+            background noise and improve feature clarity.
+        </li>
+        <li>
+            <strong style="color:#0d6efd;">Feature Extraction:</strong>
+            A deep Convolutional Neural Network (CNN) extracts
+            distinctive stroke and pattern features.
+        </li>
+        <li>
+            <strong style="color:#0d6efd;">Decision Logic:</strong>
+            Based on the confidence score, the system classifies
+            the signature as Accept, Review, or Reject.
+        </li>
+    </ul>
+
+</div>
+
+
+            <!-- ABOUT -->
+<div class="panel" id="about-panel">
+
+    <p style="font-size:1.05rem; font-weight:600; color:#1a202c;">
+        This project demonstrates a practical AI-based approach
+        to signature verification for fraud detection and document security.
+    </p>
+
+    <p style="margin-top:0.8rem; font-size:1rem; color:#374151;">
+        It is designed for real-world applications such as banking,
+        legal document validation, and identity verification,
+        where accuracy and consistency are critical.
+    </p>
+
+</div>
+
+
+            <!-- RESULT -->
+            <section id="result-section" class="result-card hidden">
+                <h2>Verification Result</h2>
+
+                <div id="loader" class="loader hidden"></div>
+
+                <div id="result-content">
+                    <h3 id="result-decision"></h3>
+
+                    <p>
+                        Confidence Score:
+                        <span id="result-confidence"></span><br>
+                        <small style="color:#6c757d;">
+                            Score represents similarity with learned genuine signature patterns.
+                        </small>
+                    </p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
