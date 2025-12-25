@@ -1,0 +1,350 @@
+/* NEW: Import the professional "Inter" font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- Global Styles & "Luxurious Vibe" Variables --- */
+:root {
+    --primary-color: #0052cc; /* A strong, corporate blue */
+    --primary-hover: #003f9e;
+    --bg-primary: #f4f7f6;     /* Whitish-gray background */
+    --bg-secondary: #ffffff;   /* White for cards and sidebar */
+    --text-primary: #1a202c;   /* Dark charcoal text */
+    --text-secondary: #5a6472; /* Lighter gray text */
+    --border-color: #e2e8f0;   /* Light, subtle border */
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    
+    /* NEW: Using the "Inter" font */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* --- HIERARCHY FIX: Bolder Headings --- */
+h1, h2, h3, h4 {
+    color: var(--text-primary);
+    font-weight: 700; /* Bolder */
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; margin-bottom: 1.5rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+
+p, li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+ul {
+    padding-left: 20px;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex-shrink: 0;
+}
+.sidebar-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.sidebar-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+}
+.menu-item {
+    display: flex; /* NEW: To align icon and text */
+    align-items: center;
+    gap: 0.75rem; /* NEW: Space between icon and text */
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+/* NEW: Icon styling */
+.menu-item i {
+    width: 16px; /* Give icons a fixed width */
+    text-align: center;
+}
+.menu-item:hover {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+.menu-item.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+.main-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* --- Panels --- */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* --- NEW: Dashboard Stat Cards --- */
+.stat-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid */
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+.stat-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.stat-card-icon {
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 50%; /* Circle */
+    background: var(--bg-primary);
+    display: grid;
+    place-items: center;
+}
+.stat-card-icon i {
+    line-height: 1;
+}
+.stat-card-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.stat-card-info p {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+
+/* --- Signature Pad --- */
+.signature-pad-container {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-top: 1.5rem;
+}
+#signature-canvas {
+    width: 100%;
+    height: 300px;
+    cursor: crosshair;
+}
+.sig-pad-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+}
+
+/* --- File Upload --- */
+.file-upload-wrapper {
+    position: relative;
+    margin: 1.5rem 0;
+}
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem;
+    text-align: center;
+    background-color: var(--bg-secondary);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.file-upload-label i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+.file-upload-label:hover {
+    border-color: var(--primary-color);
+    background-color: #fcfdfe;
+}
+#file-name {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+#file-input { opacity: 0; position: absolute; z-index: -1; }
+
+/* --- Buttons --- */
+.button-primary {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button-primary:hover {
+    background-color: var(--primary-hover);
+}
+.button-primary:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+.button-secondary {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button-secondary:hover {
+    background-color: var(--bg-primary);
+}
+
+/* --- Result Section --- */
+.hidden { display: none !important; }
+
+.result-card {
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+.result-card h2 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+#result-decision {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0.5rem 0 1rem 0; /* Adjusted margin */
+}
+#result-decision[data-decision="Accept"] { color: var(--color-success); }
+#result-decision[data-decision="Review"] { color: var(--color-warning); }
+#result-decision[data-decision="Reject"] { color: var(--color-danger); }
+
+#result-confidence {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* --- Loader --- */
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid var(--border-color);
+    border-bottom-color: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    margin: 1.5rem 0;
+}
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- NEW STYLES: Result Image Preview --- */
+.result-image-wrapper {
+    margin: 1.5rem auto;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.image-frame {
+    width: 100%;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#result-display-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px; /* Prevent it from being too tall */
+    object-fit: contain;
+}
+
+small {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
